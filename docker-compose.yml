@@ -1,0 +1,37 @@
+version: '3.8'
+service:
+   db:
+     image: postgres: 16
+     container_name: university-db
+     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: motdepasse123
+      POSTGRES_DB: university
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  app:
+    build: .
+    container_name: university-app
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: university
+      DB_USER: postgres
+      DB_PASSWORD: motdepasse123
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge
