@@ -1,9 +1,9 @@
-version: '3.8'
-service:
-   db:
-     image: postgres: 16
-     container_name: university-db
-     environment:
+
+services:
+  db:
+    image: postgres:16
+    container_name: university-db
+    environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: motdepasse123
       POSTGRES_DB: university
